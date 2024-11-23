@@ -38,6 +38,15 @@ def main(device, capture=False, output_file="output.avi"):
         out.release()
     cv.destroyAllWindows()
 
+
+'''
+Usage:
+    # capture camera 0 (default camera)
+    python capture.py 0 --capture --output_file newvid.avi
+
+    # see the content of a video
+    python capture.py stretch.avi
+'''
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Video capture arguments")
     parser.add_argument("device", help="Camera or video file number")
@@ -45,10 +54,6 @@ if __name__ == "__main__":
     parser.add_argument("--output_file", type=str, help="Name of the video file to write to")
     args = parser.parse_args()
 
-    device = int(args.device) if args.device == "0" else args.device
+    device = int(args.device) if args.device == "0" or args.device == "1" or args.device == "2" else args.device
 
     main(device, capture=args.capture, output_file=args.output_file)
-
-
-
-# example python capture.py stretch.avi
